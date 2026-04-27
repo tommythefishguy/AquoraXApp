@@ -939,20 +939,25 @@ function restoreLastSafetyBackup(){
       cloud.textContent = aqxFormatTime(localStorage.getItem(AQX_CLOUD_LAST_SYNC_KEY));
     }
 
-    if(typeof aqxSetSyncBadge === "function"){
-      if(!window.aqxFirebaseReady){
-        aqxSetSyncBadge("bad","🔴 Firebase not ready");
-      }else if(!window.aqxAuthReady){
-        aqxSetSyncBadge("warn","🟡 Checking login");
-      }else if(u){
-        aqxSetSyncBadge(
-          localStorage.getItem(AQX_CLOUD_LAST_SYNC_KEY) ? "good" : "warn",
-          localStorage.getItem(AQX_CLOUD_LAST_SYNC_KEY) ? "🟢 Synced / Ready" : "🟡 Logged in"
-        );
-      }else{
-        aqxSetSyncBadge("warn","🟡 Offline / Local only");
-      }
-    }
+  if(typeof aqxSetSyncBadge === "function"){
+  if(!window.aqxFirebaseReady){
+    aqxSetSyncBadge("bad","🔴 Firebase not ready");
+  }
+  else if(!window.aqxAuthReady){
+    aqxSetSyncBadge("warn","🟡 Checking");
+  }
+  else if(u){
+    const synced = !!localStorage.getItem(AQX_CLOUD_LAST_SYNC_KEY);
+
+    aqxSetSyncBadge(
+      synced ? "good" : "warn",
+      synced ? "🟢 Synced / Ready" : "🟡 Logged in"
+    );
+  }
+  else{
+    aqxSetSyncBadge("warn","🟡 Offline / Local only");
+  }
+}
   };
 
   function bindAuth(){
