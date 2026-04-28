@@ -2574,7 +2574,7 @@ function saveTheme(){
     let t = {
       accent: color,
       dim: dim,
-      bg: bg,
+      bg: bg || existing.bg || '',
       panelOpacity: style.panelOpacity,
       panelGlow: style.panelGlow
     };
@@ -2591,7 +2591,7 @@ function saveTheme(){
     finish(existing.bg);
   }
 }
-function applyTheme(){let t=getTheme(),root=document.documentElement;if(t.accent)root.style.setProperty('--cyan',t.accent);root.style.setProperty('--aqxPanelOpacity',String(Math.max(.15,Math.min(1,Number(t.panelOpacity??.96)))));root.style.setProperty('--aqxPanelGlow',String(Math.max(0,Math.min(.35,Number(t.panelGlow??.12)))));if(t.bg){document.body.classList.add('customBg');document.body.style.background=`url(${t.bg}) center/cover fixed, linear-gradient(180deg,#020814,#000 88%)`;root.style.setProperty('--bgDim',String(t.dim??.25))}else document.body.classList.remove('customBg');if(document.getElementById('themeColor')&&t.accent)themeColor.value=t.accent;if(document.getElementById('bgBrightness')&&t.dim!==undefined)bgBrightness.value=t.dim;if(document.getElementById('panelOpacity'))panelOpacity.value=t.panelOpacity??.96;if(document.getElementById('panelGlow'))panelGlow.value=t.panelGlow??.12;updateLoadoutPreview()}
+function applyTheme(){let t=getTheme(),root=document.documentElement;if(t.accent)root.style.setProperty('--cyan',t.accent);root.style.setProperty('--aqxPanelOpacity',String(Math.max(0,Math.min(1,Number(t.panelOpacity??.96)))));root.style.setProperty('--aqxPanelGlow',String(Math.max(0,Math.min(.35,Number(t.panelGlow??.12)))));if(t.bg){document.body.classList.add('customBg');document.body.style.background=`url(${t.bg}) center/cover fixed, linear-gradient(180deg,#020814,#000 88%)`;root.style.setProperty('--bgDim',String(t.dim??.25))}else document.body.classList.remove('customBg');if(document.getElementById('themeColor')&&t.accent)themeColor.value=t.accent;if(document.getElementById('bgBrightness')&&t.dim!==undefined)bgBrightness.value=t.dim;if(document.getElementById('panelOpacity'))panelOpacity.value=t.panelOpacity??.96;if(document.getElementById('panelGlow'))panelGlow.value=t.panelGlow??.12;updateLoadoutPreview()}
 function clearBackgroundOnly(){let t=getTheme();delete t.bg;if(setTheme(t))applyTheme()}
 function resetTheme(){if(!confirm('Reset AquoraX theme and loadout style?'))return;localStorage.removeItem('reefos_theme');location.reload()}
 function renderAnalytics(){let a=readRaw('reefos_ana',{opens:0});anaOpens.textContent=a.opens||0;anaTests.textContent=tests().length;anaCorals.textContent=corals().length;anaEquip.textContent=equips().length;anaDoses.textContent=doses().length;anaRems.textContent=rems().length}function shareAquoraX(){let link=location.origin+location.pathname;if(navigator.share)navigator.share({title:'AquoraX',text:'AquoraX - Smart Reef Management',url:link});else navigator.clipboard.writeText(link).then(()=>alert('AquoraX link copied'))}function exportBackup(){let data={};Object.keys(localStorage).forEach(k=>{if(k.startsWith('reefos_'))data[k]=localStorage.getItem(k)});let b=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='AquoraX_Backup.json';a.click()}function importBackup(input){let f=input.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{let d=JSON.parse(r.result);Object.entries(d).forEach(([k,v])=>localStorage.setItem(k,v));location.reload()};r.readAsText(f)}
