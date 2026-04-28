@@ -5403,7 +5403,7 @@ document.addEventListener('DOMContentLoaded', function(){
   function clampOpacity(v){
     v = parseFloat(v);
     if(isNaN(v)) v = .88;
-    return Math.max(.03, Math.min(1, v));
+    return Math.max(0, Math.min(1, v));
   }
 
   function applyGlassOpacity(v){
@@ -5420,11 +5420,11 @@ document.addEventListener('DOMContentLoaded', function(){
     if(!slider || slider.__aqxGlassSliderFixed) return;
 
     slider.__aqxGlassSliderFixed = true;
-    slider.min = '0.03';
+    slider.min = '0';
     slider.max = '1';
     slider.step = '0.01';
 
-    const saved = localStorage.getItem('aqx_panel_opacity_real') || localStorage.getItem('aqxPanelOpacity') || slider.value || '.88';
+    const saved = localStorage.getItem('aqx_panel_opacity_real') || localStorage.getItem('aqxPanelOpacity') || slider.value || '0.96';
     const opacity = clampOpacity(saved);
     slider.value = opacity;
     applyGlassOpacity(opacity);
