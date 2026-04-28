@@ -345,6 +345,43 @@ button.aqxPressed,.tool.aqxPressed,.tab.aqxPressed,.iconBtn.aqxPressed{
   color:#ff7b96!important;
   box-shadow:none!important;
 }
+ /* =========================
+   AQUORAX GLOBAL BUTTON UPGRADE
+========================= */
+
+button, .btn, .iconBtn, .tool, .tab {
+  position: relative;
+  overflow: hidden;
+  transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+}
+
+button:active, .btn:active, .iconBtn:active, .tool:active, .tab:active {
+  transform: scale(.96);
+  filter: brightness(1.15);
+  box-shadow: 0 0 28px rgba(0,229,255,.22);
+}
+
+.aqxRipple {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0,229,255,.45);
+  transform: translate(-50%,-50%) scale(1);
+  pointer-events: none;
+  animation: aqxRipple .55s ease-out forwards;
+}
+
+@keyframes aqxRipple {
+  to {
+    transform: translate(-50%,-50%) scale(16);
+    opacity: 0;
+  }
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
 
 </style>
 
