@@ -246,21 +246,34 @@ button.aqxPressed,.tool.aqxPressed,.tab.aqxPressed,.iconBtn.aqxPressed{
 /* AquoraX v24 Custom Loadout Mode */
 /* v1.2 polished glass panel system: this uses background shorthand, not background-color, so it overrides older gradients properly. */
 .card,.hero,.param,.tool,.item,.stat,.syncInfoBox,.themePreset,.layoutRow,.soundToggleRow,.photo,.syncStatusCard,.emergencyBox,.aqxComparePanel,.growthCompareCard,.loadoutPreview{
-  background:linear-gradient(180deg,rgba(7,24,39,var(--aqxPanelOpacity)),rgba(2,9,16,calc(var(--aqxPanelOpacity) + .02)))!important;
-  backdrop-filter:blur(12px) saturate(1.15);
-  -webkit-backdrop-filter:blur(12px) saturate(1.15);
+ background: rgba(7,24,39,var(--aqxPanelOpacity)) !important;
+backdrop-filter: none !important;
+-webkit-backdrop-filter: none !important;
+/* FULL TRANSPARENT MODE */
+body.aqxFullClear .card,
+body.aqxFullClear .hero,
+body.aqxFullClear .param,
+body.aqxFullClear .tool,
+body.aqxFullClear .item,
+body.aqxFullClear .stat {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: rgba(255,255,255,calc(0.08 * var(--aqxPanelOpacity))) !important;
 }
-.hero{
-  background:linear-gradient(145deg,rgba(0,229,255,calc(var(--aqxPanelOpacity) * .14)),rgba(7,24,39,var(--aqxPanelOpacity)) 45%,rgba(166,65,255,calc(var(--aqxPanelOpacity) * .10)))!important;
+.hero{  
+ background: rgba(7,24,39,var(--aqxPanelOpacity)) !important;
+}
+
+}
+}
+ 
+.card,.hero{
+  box-shadow:
+    0 15px 40px rgba(0,0,0,calc(.32 * var(--aqxPanelOpacity))),
+    0 0 34px rgba(0,229,255,calc(var(--aqxPanelGlow) * var(--aqxPanelOpacity))) !important;
 }
 .param:before,.tool:before{
-  opacity:calc(.35 + var(--aqxPanelGlow));
-}
-.card,.hero{
-  box-shadow:0 15px 40px rgba(0,0,0,.32),0 0 34px rgba(0,229,255,var(--aqxPanelGlow))!important;
-}
-.param,.tool,.item,.stat,.photo,.layoutRow,.syncInfoBox,.themePreset,.soundToggleRow{
-  box-shadow:0 10px 28px rgba(0,0,0,.22),0 0 18px rgba(0,229,255,calc(var(--aqxPanelGlow) * .45));
+  opacity:calc((.35 + var(--aqxPanelGlow)) * var(--aqxPanelOpacity));
 }
 .loadoutRangeRow{display:grid;grid-template-columns:1fr 74px;gap:12px;align-items:center;margin:8px 0 14px}
 .loadoutRangeRow input{margin:0}
